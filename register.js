@@ -98,10 +98,10 @@ function handleFormSubmit(e) {
 
   if (clickedButton === "join") {
     location.replace(
-      `/index.html?server_address=${e.target.serverAddress.value}`
+      `/beaconeer-chat/index.html?server_address=${e.target.serverAddress.value}`
     );
   } else if (clickedButton === "create") {
-    location.replace(`/server.html`);
+    location.replace(`/beaconeer-chat/server.html`);
   }
 }
 
