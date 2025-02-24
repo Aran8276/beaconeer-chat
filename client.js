@@ -9,14 +9,14 @@ const checkValidData = () => {
     alert(
       "Pastikan anda telah me-masukan alamat server.\n\nAnda akan dialihkan ke halaman register / welcome."
     );
-    window.location.replace("/register.html");
+    window.location.replace("/beaconeer-chat/register.html");
   }
 
   if (!user) {
     alert(
       "Pastikan anda telah me-masukan detail user server (terutama username).\n\nAnda akan dialihkan ke halaman register / welcome."
     );
-    window.location.replace("/register.html");
+    window.location.replace("/beaconeer-chat/register.html");
   }
 };
 

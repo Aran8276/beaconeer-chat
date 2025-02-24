@@ -80,7 +80,7 @@ b.on("connections", function (c) {
     log(clientURL + "\n");
     log("Connect back to this server-in-a-tab using the link above.");
 
-    open(`/index.html?server_address=${b.address()}`, "_blank");
+    open(`/beaconeer-chat/index.html?server_address=${b.address()}`, "_blank");
   }
   log("connections:", c);
 });
