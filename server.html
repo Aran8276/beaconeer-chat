@@ -3,22 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Bugout server boilerplate</title>
-    <script src="./bugout.min.js"></script>
+    <title>Bugout messageboard server</title>
+    <script src="./bugout.min.js" type="application/javascript"></script>
+    <style>
+      body {
+        background-color: #333;
+      }
+      pre {
+        color: #eee;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        line-height: 1em;
+      }
+    </style>
   </head>
   <body>
     <pre id="log"></pre>
   </body>
-  <style>
-    body {
-      background-color: #333;
-    }
-    pre {
-      color: #def;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-  </style>
-
   <script src="./server.js"></script>
 </html>

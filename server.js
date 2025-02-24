@@ -1,12 +1,28 @@
-// instantiate our bugout instance with previously saved seed (if any)
-var b = new Bugout({ seed: localStorage["bugout-demo-seed"] });
+log("*BUGOUT*");
+log(
+  "**JANGAN MENUTUP TAB INI JIKA ANDA BELUM MAU MENGHENTIKAN SESI CHATTING**"
+);
+log("\nmessageboard server\n");
+log("(view source to see the server code)\n");
 
+// instantiate our bugout instance
+var b = new Bugout({ seed: localStorage["bugout-messageboard-seed"] });
 // save the seed for next time
-localStorage["bugout-demo-seed"] = b.seed;
+localStorage["bugout-messageboard-seed"] = b.seed;
+
+console.log(localStorage.getItem("bugout-messageboard-seed"));
 
 // log this server's address
 log("address:", b.address());
 log("announcing...");
+
+// load messages from previous run
+if (localStorage["bugout-messageboard"]) {
+  messages = JSON.parse(localStorage["bugout-messageboard"]);
+}
+if (typeof messages != "object" || !messages["length"]) {
+  messages = [];
+}
 
 /*** rpc calls ***/
 
@@ -16,16 +32,57 @@ b.register("ping", function (address, args, cb) {
   cb(args);
 });
 
-// register your RPC calls for clients here
+/*** messageboard server API ***/
+b.register(
+  "post",
+  function (address, message, cb) {
+    if (typeof message == "string" && message.length < 280) {
+      var m = { address: address, m: message, t: new Date().getTime() };
+      log("messageboard:", m);
+      messages.push(m);
+      messages = messages.slice(Math.max(0, messages.length - 10));
+      localStorage["bugout-messageboard"] = JSON.stringify(messages);
+      cb(true);
+      b.send("refresh");
+    } else {
+      cb(false);
+    }
+  },
+  "Post a message to the board"
+);
+
+b.register(
+  "list",
+  function (address, args, cb) {
+    cb(messages.slice().reverse());
+    console.log(messages);
+  },
+  "List most recent messages"
+);
 
 /*** logging ***/
 
 // log when network connectivity changes
+var connected = false;
 b.on("connections", function (c) {
-  log("connections:", c);
-  if (c == 0) {
+  if (c == 0 && connected == false) {
+    connected = true;
     log("ready");
+    // link to the messageboard client URL
+    var clientURL =
+      document.location.href.replace("-server", "") + "#" + b.address();
+    // qrcode for the client URL
+    if (window.innerWidth > 600) {
+      log("qr here");
+    } else {
+      log();
+    }
+    log(clientURL + "\n");
+    log("Connect back to this server-in-a-tab using the link above.");
+
+    open(`/index.html?server_address=${b.address()}`, "_blank");
   }
+  log("connections:", c);
 });
 
 // log when a client sends a message

@@ -3,11 +3,101 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./bugout.min.js"></script>
     <title>Document</title>
+    <script src="./bugout.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
-    <div class=""></div>
+  <body
+    class="bg-gray-900 text-white flex items-center justify-center min-h-screen"
+  >
+    <div
+      class="flex flex-col-reverse w-full overflow-y-scroll h-screen md:h-[550px] max-w-4xl bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+    >
+      <div
+        class="absolute overflow-clip w-[inherit] top-0 md:top-[77px] md:w-4xl rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 p-4 flex items-center justify-between"
+      >
+        <div class="flex items-center space-x-3">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/87/Toyota_Corolla_Axio_%28E160%29_front_%28cropped%29.JPG"
+            alt="User Avatar"
+            class="w-10 h-10 rounded-full object-cover border-2 border-white"
+          />
+          <h2 id="connected" class="text-lg font-semibold"></h2>
+        </div>
+
+        <button
+          class="p-2 bg-gray-700 hover:bg-gray-600 rounded-full transition duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="p-4 flex-1">
+        <div id="messages" class="flex flex-col-reverse space-y-4 py-24"></div>
+      </div>
+
+      <div
+        class="absolute w-[inherit] md:w-4xl md:bottom-[78px] rounded-lg p-4 bg-gray-700 border-t border-gray-600"
+      >
+        <section class="flex items-center space-x-2">
+          <!-- Open the modal using ID.showModal() method -->
+          <button class="btn" onclick="my_modal_1.showModal()">share</button>
+          <dialog id="my_modal_1" class="modal">
+            <div class="modal-box">
+              <h3 class="text-lg font-bold">Bagikan Alamat Server</h3>
+              <p id="copiableLink" class="py-4"></p>
+              <button class="btn" onclick="copySeed()">Copy Seed</button>
+              <div class="modal-action">
+                <form method="dialog">
+                  <!-- if there is a button in form, it will close the modal -->
+                  <button class="btn">Close</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
+          <input
+            maxlength="279"
+            id="message"
+            type="text"
+            placeholder="Ketik pesan..."
+            class="flex-1 bg-gray-600 text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+          <button
+            id="send"
+            type="button"
+            class="p-3 bg-indigo-600 hover:bg-indigo-500 rounded-full transition duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+              />
+            </svg>
+          </button>
+        </section>
+      </div>
+    </div>
   </body>
 
   <script src="./client.js"></script>
